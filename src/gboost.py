@@ -69,8 +69,7 @@ class sgboost(object):
 		self.scale_pos_weight = scale_pos_weight
 		self.pred_cutoff = pred_cutoff
 		
-		#将X,y修改为能通过int下标（从0开始）进行索引的FramData
-		X.reset_index(drop = True,inplace = True)
+ 		X.reset_index(drop = True,inplace = True)
 		y.reset_index(drop = True,inplace = True)
 
 		if 'logisticloss':
@@ -118,7 +117,7 @@ class sgboost(object):
 		Y['hess'] = self.loss.hess(Y.y_pred.values,Y.label.values)
 
 		Y['sample_weight'] = 1.0
-		#调整正样本权重
+		# 
 		Y.loc[Y.label == 1,'sample_weight'] = self.scale_pos_weight
 		
 		for i in range(self.num_boost_round):
